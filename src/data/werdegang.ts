@@ -6,23 +6,18 @@ export interface WerdegangEntry {
 
 export const werdegang: WerdegangEntry[] = [
   {
-    when: 'seit 2025',
+    when: 'seit 2026',
     what: 'Schmitz Systemarchitektur',
-    body: 'Sparring für Geschäftsführer im Mittelstand — Mönchengladbach · Remote.',
+    body: 'Sparring für Geschäftsführer. Fokus auf den Menschen im Betrieb — nicht auf das nächste Tool. Mönchengladbach · Remote.',
   },
   {
-    when: '2018 – 2024',
-    what: 'Geschäftsführer · IT-Projekte',
-    body: 'Verantwortung für Digitalisierungsprojekte in Handel und Service. 15+ Jahre Projekt­erfahrung.',
+    when: '2021 – 2026',
+    what: 'Laminar Solutions · Individuelle Business-Lösungen',
+    body: 'Fünf Jahre, unzählige Lösungen für Industrie, Handwerk und Mittelstand. Maßarbeit statt Standard-Software.',
   },
   {
-    when: '2010 – 2018',
-    what: 'Projektleitung & Strategie',
-    body: 'Mittelstand und Konzern. ERP-Einführungen, Prozess­design, Change-Begleitung.',
-  },
-  {
-    when: 'Davor',
-    what: 'Aufgewachsen mit dem Handwerk',
-    body: 'Familie im Handwerk. Werkstatt­luft kenne ich, bevor ich PowerPoint kannte.',
+    when: 'bis 2021',
+    what: 'Studium der Informatik',
+    body: 'Schon währenddessen über 30 Mittelständler betreut — gelernt im Betrieb, nicht im Hörsaal.',
   },
 ];
