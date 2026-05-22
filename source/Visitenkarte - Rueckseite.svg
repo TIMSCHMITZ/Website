@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="85mm" height="55mm" viewBox="0 0 510 330" font-family="Manrope, system-ui, sans-serif" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+  <title>Schmitz Systemarchitektur — Visitenkarte Rückseite</title>
+
+  
+  <rect width="510" height="330" fill="#f1ebde"></rect>
+
+  
+  <g transform="translate(30,46)">
+    
+    
+    <text x="0" y="0" fill="#16223a" font-size="19" font-weight="700" letter-spacing="-0.38">
+      <tspan>Wir lösen den </tspan><tspan fill="#b85a3f">Knoten</tspan><tspan> zwischen</tspan>
+    </text>
+    <text x="0" y="24" fill="#16223a" font-size="19" font-weight="700" letter-spacing="-0.38">Mensch und IT.</text>
+
+    
+    <text x="0" y="54" fill="#16223a" fill-opacity="0.78" font-size="11.5" font-weight="400">
+      Ich finde die Lösung, die Ihr Team wirklich mitträgt —
+    </text>
+    <text x="0" y="70" fill="#16223a" fill-opacity="0.78" font-size="11.5" font-weight="400">
+      nicht die schönste auf dem Papier.
+    </text>
+  </g>
+
+  
+  
+  <line x1="30" y1="180" x2="480" y2="180" stroke="#16223a" stroke-opacity="0.18" stroke-width="1"></line>
+
+  <g font-family="IBM Plex Mono, ui-monospace, monospace" transform="translate(30,196)">
+    
+    <text x="0" y="0" fill="#16223a" fill-opacity="0.55" font-size="8.5" font-weight="500" letter-spacing="1.7">MOBIL</text>
+    <text x="76" y="0" fill="#16223a" font-size="11" font-weight="500">+49 163 727 1007</text>
+    
+    <text x="0" y="18" fill="#16223a" fill-opacity="0.55" font-size="8.5" font-weight="500" letter-spacing="1.7">E-MAIL</text>
+    <text x="76" y="18" fill="#16223a" font-size="11" font-weight="500">tim@schmitz-systemarchitektur.de</text>
+    
+    <text x="0" y="36" fill="#16223a" fill-opacity="0.55" font-size="8.5" font-weight="500" letter-spacing="1.7">WEB</text>
+    <text x="76" y="36" fill="#16223a" font-size="11" font-weight="500">schmitz-systemarchitektur.de</text>
+  </g>
+
+  
+  <g transform="translate(30,298)">
+    
+    <rect x="0" y="-5" width="6" height="6" fill="#b85a3f"></rect>
+    <text x="14" y="0" fill="#16223a" fill-opacity="0.7" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="8.5" font-weight="500" letter-spacing="1.53">SPARRING FÜR GESCHÄFTSFÜHRER</text>
+  </g>
+</svg>

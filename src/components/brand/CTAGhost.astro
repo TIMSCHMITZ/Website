@@ -1,0 +1,36 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'dark' | 'light';
+}
+
+const { href = '#', variant = 'dark' } = Astro.props;
+---
+
+<a class={`ghost ghost--${variant}`} href={href}>
+  <slot />
+</a>
+
+<style>
+  .ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    padding-bottom: 4px;
+    border-bottom: 1px solid currentColor;
+    transition: color 160ms ease, border-color 160ms ease;
+  }
+
+  .ghost--dark { color: var(--ink); }
+  .ghost--light { color: var(--bg); }
+
+  .ghost:hover,
+  .ghost:focus-visible {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+</style>

@@ -1,0 +1,133 @@
+---
+import MonoMarker from '../brand/MonoMarker.astro';
+import Accent from '../brand/Accent.astro';
+import CTA from '../brand/CTA.astro';
+import CTAGhost from '../brand/CTAGhost.astro';
+import Plakette from '../brand/Plakette.astro';
+import { contact } from '../../data/nav';
+
+const kontaktDaten = [
+  ['MOBIL', contact.phone],
+  ['E-MAIL', contact.email],
+  ['WEB', contact.web],
+  ['STANDORT', contact.location],
+];
+---
+
+<section id="kontakt" class="section section--dark kontakt">
+  <div class="container">
+    <MonoMarker opacity={0.55}>10 · Kontakt</MonoMarker>
+
+    <div class="kontakt__grid">
+      <div>
+        <h2 class="kontakt__h2">
+          Lassen Sie uns <Accent>15 Minuten</Accent> reden.
+        </h2>
+        <p class="kontakt__lead">
+          Wenn es passt, machen wir einen Termin für den Knoten. Wenn nicht, sage ich das ehrlich.
+          Das kostet Sie nichts und niemanden.
+        </p>
+        <div class="kontakt__cta">
+          <CTA href={contact.cal} variant="light" target="_blank" rel="noopener noreferrer">Termin buchen</CTA>
+          <CTAGhost href={`mailto:${contact.email}`} variant="light">{contact.email}</CTAGhost>
+        </div>
+      </div>
+
+      <div class="kontakt__card">
+        <Plakette size="md" variant="light" />
+        <dl class="kontakt__kv">
+          {kontaktDaten.map(([k, v]) => (
+            <>
+              <dt>{k}</dt>
+              <dd>{v}</dd>
+            </>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .kontakt__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 96px;
+    margin-top: 32px;
+    align-items: start;
+  }
+
+  .kontakt__h2 {
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+    margin: 0 0 32px;
+  }
+
+  .kontakt__lead {
+    font-size: 20px;
+    line-height: 1.45;
+    opacity: 0.82;
+    margin: 0 0 48px;
+    max-width: 520px;
+  }
+
+  .kontakt__cta {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .kontakt__card {
+    padding-top: 12px;
+  }
+
+  .kontakt__kv {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.6;
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    row-gap: 6px;
+    column-gap: 16px;
+    margin: 40px 0 0;
+  }
+
+  .kontakt__kv dt {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    opacity: 0.55;
+    padding-top: 3px;
+    text-transform: uppercase;
+  }
+
+  .kontakt__kv dd {
+    font-weight: 500;
+    opacity: 0.95;
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .kontakt__grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .kontakt__h2 {
+      font-size: 36px;
+      margin: 0 0 20px;
+    }
+    .kontakt__lead {
+      font-size: 16px;
+      margin: 0 0 32px;
+    }
+    .kontakt__card {
+      padding-top: 0;
+    }
+    .kontakt__kv {
+      grid-template-columns: 64px 1fr;
+      margin-top: 24px;
+    }
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+interface Props {
+  size?: number;
+  variant?: 'dark' | 'light';
+  strokeWidth?: number;
+  class?: string;
+}
+
+const { size = 120, variant = 'dark', strokeWidth = 6, class: className } = Astro.props;
+const stroke = variant === 'light' ? '#f1ebde' : '#16223a';
+const dotRadius = strokeWidth + 0.5;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 100 100"
+  width={size}
+  height={size}
+  aria-hidden="true"
+  focusable="false"
+>
+  <g fill="none" stroke={stroke} stroke-width={strokeWidth} stroke-linecap="round">
+    <path d="M 30 70 Q 30 30, 70 30" />
+    <path d="M 70 30 Q 50 70, 30 70" />
+    <path d="M 50 22 L 50 78" />
+  </g>
+  <circle cx="50" cy="50" r={dotRadius} fill="#b85a3f" />
+</svg>

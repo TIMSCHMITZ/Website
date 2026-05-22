@@ -1,0 +1,87 @@
+---
+import MonoMarker from '../brand/MonoMarker.astro';
+import Accent from '../brand/Accent.astro';
+import Portrait from '../brand/Portrait.astro';
+import Divider from '../brand/Divider.astro';
+---
+
+<section id="vita-intro" class="section wer">
+  <div class="container">
+    <MonoMarker>02 · Wer ich bin</MonoMarker>
+
+    <div class="wer__grid">
+      <Portrait width={360} height={460} caption="Tim Schmitz · Inhaber" />
+      <div>
+        <h2 class="wer__h2">
+          Bevor jemand Software kauft, schaue ich, was im Betrieb <Accent>wirklich klemmt</Accent>.
+        </h2>
+        <div class="wer__body">
+          <p>
+            Mein Name ist Tim Schmitz. Ich bin Sparringspartner für Geschäftsführer im Mittelstand
+            — überwiegend Handwerk und Dienstleistung, 10 bis 30 Mitarbeitende.
+          </p>
+          <p>
+            Ich verkaufe keine Software. Ich verkaufe Klarheit. Wir setzen uns 120 Minuten an einen
+            Tisch und gehen Ihren Betrieb durch — Prozesse, Menschen, was läuft, was hakt.
+          </p>
+          <p>
+            Am Ende bekommen Sie einen Report. Lesbar. Auf den Punkt. Mit einer klaren Empfehlung,
+            was Sie als nächstes anpacken — und genauso wichtig: was Sie sein lassen.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <Divider />
+  </div>
+</section>
+
+<style>
+  .wer__grid {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 96px;
+    margin-top: 56px;
+    align-items: start;
+  }
+
+  .wer__h2 {
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  .wer__body {
+    margin-top: 36px;
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 540px;
+    color: var(--ink);
+  }
+
+  .wer__body p {
+    margin: 0 0 18px;
+  }
+
+  .wer__body p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 900px) {
+    .wer__grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-top: 32px;
+    }
+    .wer__h2 {
+      font-size: 28px;
+    }
+    .wer__body {
+      font-size: 15.5px;
+      margin-top: 24px;
+    }
+  }
+</style>

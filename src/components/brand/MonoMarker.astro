@@ -1,0 +1,31 @@
+---
+interface Props {
+  color?: string;
+  opacity?: number;
+  size?: number;
+  class?: string;
+}
+
+const { color, opacity = 0.55, size = 10, class: className } = Astro.props;
+---
+
+<div
+  class={['mono-marker', className].filter(Boolean).join(' ')}
+  style={`
+    font-size: ${size}px;
+    opacity: ${opacity};
+    ${color ? `color: ${color};` : ''}
+  `}
+>
+  <slot />
+</div>
+
+<style>
+  .mono-marker {
+    font-family: var(--mono);
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+</style>

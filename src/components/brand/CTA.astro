@@ -1,0 +1,65 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'dark' | 'light';
+  rel?: string;
+  target?: string;
+}
+
+const { href = '#kontakt', variant = 'dark', rel, target } = Astro.props;
+---
+
+<a class={`cta cta--${variant}`} href={href} rel={rel} target={target}>
+  <span class="cta-label"><slot /></span>
+  <span class="cta-dot" aria-hidden="true"></span>
+</a>
+
+<style>
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 24px;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    text-decoration: none;
+    border: 0;
+    transition: background 160ms ease, color 160ms ease;
+  }
+
+  .cta--dark {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .cta--dark:hover,
+  .cta--dark:focus-visible {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .cta--light {
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  .cta--light:hover,
+  .cta--light:focus-visible {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .cta-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  .cta--dark:hover .cta-dot,
+  .cta--light:hover .cta-dot {
+    background: var(--bg);
+  }
+</style>

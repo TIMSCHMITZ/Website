@@ -1,0 +1,99 @@
+---
+import MonoMarker from '../brand/MonoMarker.astro';
+import { stimmen } from '../../data/stimmen';
+---
+
+<section id="referenzen" class="section section--sand stimmen">
+  <div class="container">
+    <MonoMarker>06 · Stimmen</MonoMarker>
+    <h2 class="stimmen__h2">
+      Was Inhaber sagen, mit denen ich gearbeitet habe.
+    </h2>
+
+    <div class="stimmen__grid">
+      {stimmen.map((s) => (
+        <figure class="stimme">
+          <blockquote class="stimme__quote">„{s.quote}"</blockquote>
+          <figcaption>
+            <div class="stimme__who">{s.who}</div>
+            <div class="stimme__sub">{s.sub}</div>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+
+    <p class="stimmen__footnote">
+      Stimmen anonymisiert auf Wunsch · Identitäten auf Anfrage
+    </p>
+  </div>
+</section>
+
+<style>
+  .stimmen__h2 {
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    line-height: 1.0;
+    margin: 24px 0 80px;
+    max-width: 760px;
+  }
+
+  .stimmen__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+  }
+
+  .stimme {
+    margin: 0;
+    border-top: 1.5px solid var(--ink);
+    padding-top: 32px;
+  }
+
+  .stimme__quote {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+    margin: 0 0 32px;
+  }
+
+  .stimme__who {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .stimme__sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-top: 4px;
+  }
+
+  .stimmen__footnote {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin: 64px 0 0;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 900px) {
+    .stimmen__h2 {
+      font-size: 28px;
+      margin: 20px 0 40px;
+    }
+    .stimmen__grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .stimme__quote { font-size: 19px; margin: 0 0 20px; }
+    .stimmen__footnote { margin-top: 40px; }
+  }
+</style>

@@ -1,0 +1,61 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TopNav from '../components/nav/TopNav.astro';
+import MobileMenu from '../components/nav/MobileMenu.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const homeBase = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={`${title} — Schmitz Systemarchitektur`} description={description}>
+  <TopNav variant="dark" homeHref={homeBase} />
+  <MobileMenu homeHref={homeBase} />
+
+  <main class="legal">
+    <div class="container">
+      <h1>{title}</h1>
+      <slot />
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal {
+    background: var(--bg);
+    color: var(--ink);
+    padding-block: 140px 96px;
+    min-height: 60vh;
+  }
+
+  .legal h1 {
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    line-height: 1.05;
+    margin: 0 0 32px;
+  }
+
+  .legal :global(p) {
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 720px;
+    margin: 0 0 18px;
+  }
+
+  @media (max-width: 720px) {
+    .legal {
+      padding-block: 96px 64px;
+    }
+    .legal h1 {
+      font-size: 32px;
+    }
+  }
+</style>

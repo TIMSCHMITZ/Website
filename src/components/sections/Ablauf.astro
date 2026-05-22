@@ -1,0 +1,93 @@
+---
+import MonoMarker from '../brand/MonoMarker.astro';
+import Accent from '../brand/Accent.astro';
+import { ablaufSteps } from '../../data/ablauf';
+---
+
+<section id="ablauf" class="section ablauf">
+  <div class="container">
+    <MonoMarker>05 · So läuft ein Knoten ab</MonoMarker>
+    <h2 class="ablauf__h2">
+      Vier Schritte. <Accent>Kein Theater.</Accent>
+    </h2>
+
+    <ol class="ablauf__grid">
+      {ablaufSteps.map((step) => (
+        <li class="step">
+          <span class="step__n">{step.n}</span>
+          <h3 class="step__title">{step.title}</h3>
+          <p class="step__body">{step.body}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .ablauf__h2 {
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    line-height: 1.0;
+    margin: 24px 0 80px;
+    max-width: 760px;
+  }
+
+  .ablauf__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    border-top: 1px solid rgba(22, 34, 58, 0.18);
+    padding-top: 28px;
+  }
+
+  .step {
+    display: block;
+  }
+
+  .step__n {
+    display: block;
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  .step__title {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.018em;
+    line-height: 1.15;
+    margin: 0 0 14px;
+  }
+
+  .step__body {
+    font-size: 14.5px;
+    line-height: 1.55;
+    margin: 0;
+    opacity: 0.78;
+  }
+
+  @media (max-width: 900px) {
+    .ablauf__h2 {
+      font-size: 32px;
+      margin: 20px 0 40px;
+    }
+    .ablauf__grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding-top: 0;
+      border-top: 0;
+    }
+    .step {
+      padding-top: 24px;
+      border-top: 1px solid rgba(22, 34, 58, 0.18);
+    }
+    .step__title { font-size: 19px; }
+  }
+</style>

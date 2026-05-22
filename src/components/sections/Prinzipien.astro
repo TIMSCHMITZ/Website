@@ -1,0 +1,71 @@
+---
+import MonoMarker from '../brand/MonoMarker.astro';
+import Accent from '../brand/Accent.astro';
+import { prinzipien } from '../../data/prinzipien';
+---
+
+<section id="prinzipien" class="section prinzipien">
+  <div class="container">
+    <MonoMarker>03 · Wofür ich stehe</MonoMarker>
+    <h2 class="prinzipien__h2">
+      Drei Prinzipien. <Accent>Keine Floskeln.</Accent>
+    </h2>
+
+    <div class="prinzipien__grid">
+      {prinzipien.map((p) => (
+        <article class="prinzip">
+          <MonoMarker color="var(--accent)" opacity={1} size={10}>{p.tag}</MonoMarker>
+          <h3 class="prinzip__title">{p.title}</h3>
+          <p class="prinzip__body">{p.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .prinzipien__h2 {
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    line-height: 1.0;
+    margin: 24px 0 80px;
+    max-width: 720px;
+  }
+
+  .prinzipien__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 56px;
+  }
+
+  .prinzip__title {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.018em;
+    line-height: 1.15;
+    margin: 16px 0;
+  }
+
+  .prinzip__body {
+    font-size: 15.5px;
+    line-height: 1.55;
+    margin: 0;
+    opacity: 0.82;
+  }
+
+  @media (max-width: 900px) {
+    .prinzipien__h2 {
+      font-size: 32px;
+      margin: 20px 0 48px;
+    }
+    .prinzipien__grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .prinzip__title {
+      font-size: 20px;
+      margin: 12px 0;
+    }
+  }
+</style>

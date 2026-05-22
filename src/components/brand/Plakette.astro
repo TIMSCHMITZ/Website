@@ -1,0 +1,76 @@
+---
+interface Props {
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  variant?: 'dark' | 'light';
+}
+
+const { size = 'md', variant = 'dark' } = Astro.props;
+
+const sizes = {
+  sm: { main: 14, sub: 8.5,  padX: 14, padTop: 8,  padBottom: 6,  tick: 6,  gap: 1,   subLetter: '0.18em' },
+  md: { main: 20, sub: 10,   padX: 18, padTop: 10, padBottom: 8,  tick: 8,  gap: 1.5, subLetter: '0.2em'  },
+  lg: { main: 28, sub: 11,   padX: 22, padTop: 14, padBottom: 12, tick: 10, gap: 2,   subLetter: '0.2em'  },
+  xl: { main: 36, sub: 12,   padX: 28, padTop: 18, padBottom: 14, tick: 12, gap: 3,   subLetter: '0.2em'  },
+};
+
+const s = sizes[size];
+---
+
+<div
+  class={`plakette plakette--${variant}`}
+  style={`
+    --pl-main: ${s.main}px;
+    --pl-sub: ${s.sub}px;
+    --pl-pad-x: ${s.padX}px;
+    --pl-pad-top: ${s.padTop}px;
+    --pl-pad-bottom: ${s.padBottom}px;
+    --pl-tick: ${s.tick}px;
+    --pl-gap: ${s.gap}px;
+    --pl-sub-letter: ${s.subLetter};
+  `}
+>
+  <span class="pl-sub">Tim Schmitz</span>
+  <span class="pl-main">Systemarchitektur</span>
+  <span class="pl-tick" aria-hidden="true"></span>
+</div>
+
+<style>
+  .plakette {
+    display: inline-flex;
+    flex-direction: column;
+    gap: var(--pl-gap);
+    padding: var(--pl-pad-top) var(--pl-pad-x) var(--pl-pad-bottom);
+    border: 1.5px solid currentColor;
+    position: relative;
+    line-height: 1;
+    font-family: var(--font);
+  }
+
+  .plakette--dark { color: var(--ink); }
+  .plakette--light { color: var(--bg); }
+
+  .pl-sub {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: var(--pl-sub);
+    letter-spacing: var(--pl-sub-letter);
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .pl-main {
+    font-size: var(--pl-main);
+    font-weight: 700;
+    letter-spacing: -0.022em;
+    line-height: 1;
+  }
+
+  .pl-tick {
+    position: absolute;
+    top: calc(var(--pl-tick) / -2);
+    right: calc(var(--pl-tick) / -2);
+    width: var(--pl-tick);
+    height: var(--pl-tick);
+    background: var(--accent);
+  }
+</style>

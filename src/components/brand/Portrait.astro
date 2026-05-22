@@ -1,0 +1,81 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../../assets/tim-portrait.png';
+
+interface Props {
+  width?: number;
+  height?: number;
+  variant?: 'dark' | 'light';
+  bleed?: boolean;
+  caption?: string;
+}
+
+const { width = 360, height = 460, variant = 'dark', bleed = false, caption } = Astro.props;
+---
+
+<div
+  class={['portrait', `portrait--${variant}`, bleed ? 'portrait--bleed' : ''].filter(Boolean).join(' ')}
+  style={`--w: ${width}px; --h: ${height}px;`}
+>
+  <Image
+    src={portrait}
+    alt="Tim Schmitz · Inhaber & Systemarchitekt"
+    width={width * 2}
+    height={height * 2}
+    widths={[width, width * 2]}
+    sizes={`(max-width: 720px) 100vw, ${width}px`}
+    format="webp"
+    quality={80}
+    loading="eager"
+    decoding="async"
+    draggable={false}
+  />
+  {caption && <div class="caption">{caption}</div>}
+</div>
+
+<style>
+  .portrait {
+    width: var(--w);
+    height: var(--h);
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .portrait--dark { background: var(--sand); }
+  .portrait--light {
+    background: rgba(241, 235, 222, 0.06);
+    border: 1px solid rgba(241, 235, 222, 0.18);
+  }
+
+  .portrait :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 28%;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .portrait--bleed :global(img) {
+    object-position: center 22%;
+    transform: scale(1.05);
+  }
+
+  .caption {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(22, 34, 58, 0.55);
+  }
+
+  .portrait--light .caption {
+    color: rgba(241, 235, 222, 0.7);
+  }
+</style>

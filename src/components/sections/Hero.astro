@@ -1,0 +1,119 @@
+---
+import Knoten from '../brand/Knoten.astro';
+import MonoMarker from '../brand/MonoMarker.astro';
+import CTA from '../brand/CTA.astro';
+import CTAGhost from '../brand/CTAGhost.astro';
+import Accent from '../brand/Accent.astro';
+import TopNav from '../nav/TopNav.astro';
+---
+
+<section class="hero" id="top">
+  <TopNav variant="light" />
+
+  <div class="hero__inner">
+    <div class="hero__knoten">
+      <Knoten size={170} variant="light" strokeWidth={5.5} />
+    </div>
+
+    <MonoMarker opacity={0.55} size={11}>01 · Sparring für Geschäftsführer</MonoMarker>
+
+    <h1 class="hero__h1">
+      Wir lösen den <Accent>Knoten</Accent> zwischen Mensch und IT.
+    </h1>
+
+    <p class="hero__lead">
+      Ich finde die Lösung, die Ihr Team wirklich mitträgt — nicht die schönste auf dem Papier.
+      Sparring für Inhaber und Geschäftsführer in Handwerk und Dienstleistung.
+    </p>
+
+    <div class="hero__cta">
+      <CTA href="#knoten" variant="light">Den Knoten kennenlernen</CTA>
+      <CTAGhost href="#prinzipien" variant="light">Wie ich arbeite</CTAGhost>
+    </div>
+  </div>
+
+  <div class="hero__stamp">
+    <MonoMarker opacity={0.5} size={9}>No. 01 · Mönchengladbach · 2026</MonoMarker>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: var(--ink);
+    color: var(--bg);
+    min-height: 880px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero__inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 120px var(--pad-x) 140px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero__knoten {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 56px;
+  }
+
+  .hero__h1 {
+    font-size: clamp(36px, 6vw, 76px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+    margin: 28px 0 32px;
+    color: var(--bg);
+  }
+
+  .hero__lead {
+    font-size: clamp(15px, 1.7vw, 22px);
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--bg);
+    opacity: 0.78;
+    max-width: 680px;
+    margin: 0 auto 56px;
+  }
+
+  .hero__cta {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .hero__stamp {
+    position: absolute;
+    bottom: 32px;
+    right: var(--pad-x);
+  }
+
+  @media (max-width: 720px) {
+    .hero { min-height: 0; }
+    .hero__inner {
+      padding: 56px var(--pad-x-mobile) 96px;
+    }
+    .hero__knoten {
+      margin-bottom: 32px;
+    }
+    .hero__knoten :global(svg) {
+      width: 92px !important;
+      height: 92px !important;
+    }
+    .hero__h1 {
+      margin: 20px 0 20px;
+    }
+    .hero__lead {
+      margin-bottom: 32px;
+    }
+    .hero__stamp {
+      right: var(--pad-x-mobile);
+      bottom: 16px;
+    }
+  }
+</style>

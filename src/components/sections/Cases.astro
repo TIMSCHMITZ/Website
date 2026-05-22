@@ -1,0 +1,122 @@
+---
+import MonoMarker from '../brand/MonoMarker.astro';
+import Accent from '../brand/Accent.astro';
+import Divider from '../brand/Divider.astro';
+import { cases } from '../../data/cases';
+---
+
+<section id="cases" class="section cases">
+  <div class="container">
+    <MonoMarker>07 · Beispiele</MonoMarker>
+    <h2 class="cases__h2">
+      Drei Knoten. Drei Mal etwas anderes herausgekommen als gedacht.
+    </h2>
+
+    <div class="cases__list">
+      {cases.map((cs) => (
+        <article class="case">
+          <Divider />
+          <div class="case__grid">
+            <div class="case__meta">
+              <MonoMarker color="var(--accent)" opacity={1}>{cs.n}</MonoMarker>
+              <div class="case__branche">{cs.branche}</div>
+            </div>
+            <div class="case__main">
+              <h3 class="case__title">{cs.title}</h3>
+              <p class="case__body">{cs.body}</p>
+            </div>
+            <div class="case__ergebnis">
+              <MonoMarker size={9} opacity={0.55}>Ergebnis</MonoMarker>
+              <div class="case__tag">
+                <Accent>—</Accent> {cs.ergebnis}
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cases__h2 {
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    line-height: 1.0;
+    margin: 24px 0 80px;
+    max-width: 720px;
+  }
+
+  .cases__list {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .case__grid {
+    display: grid;
+    grid-template-columns: 180px 1fr 280px;
+    gap: 48px;
+    align-items: start;
+    padding-top: 32px;
+  }
+
+  .case__branche {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-top: 10px;
+  }
+
+  .case__title {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.018em;
+    line-height: 1.15;
+    margin: 0 0 16px;
+  }
+
+  .case__body {
+    font-size: 15.5px;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.82;
+    max-width: 600px;
+  }
+
+  .case__ergebnis {
+    padding-left: 24px;
+    border-left: 1px solid rgba(22, 34, 58, 0.2);
+  }
+
+  .case__tag {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    margin-top: 10px;
+    line-height: 1.3;
+  }
+
+  @media (max-width: 900px) {
+    .cases__h2 {
+      font-size: 28px;
+      margin: 20px 0 40px;
+    }
+    .case__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding-top: 24px;
+    }
+    .case__title { font-size: 20px; }
+    .case__ergebnis {
+      border-left: 0;
+      border-top: 1px solid rgba(22, 34, 58, 0.2);
+      padding-left: 0;
+      padding-top: 16px;
+    }
+    .case__tag { font-size: 15px; }
+  }
+</style>

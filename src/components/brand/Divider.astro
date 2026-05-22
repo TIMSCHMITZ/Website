@@ -1,0 +1,24 @@
+---
+interface Props {
+  variant?: 'dark' | 'light';
+  class?: string;
+}
+
+const { variant = 'dark', class: className } = Astro.props;
+---
+
+<div
+  class={['divider', `divider--${variant}`, className].filter(Boolean).join(' ')}
+  role="presentation"
+></div>
+
+<style>
+  .divider {
+    height: 1px;
+    width: 100%;
+    opacity: 0.18;
+  }
+
+  .divider--dark { background: var(--ink); }
+  .divider--light { background: var(--bg); }
+</style>

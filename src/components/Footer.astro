@@ -1,0 +1,59 @@
+---
+import MonoMarker from './brand/MonoMarker.astro';
+
+const base = import.meta.env.BASE_URL;
+const impressum = `${base}impressum/`.replace('//', '/');
+const datenschutz = `${base}datenschutz/`.replace('//', '/');
+---
+
+<footer class="footer">
+  <div class="container footer__row">
+    <MonoMarker opacity={0.5} size={9}>
+      © 2026 Schmitz Systemarchitektur · Mönchengladbach
+    </MonoMarker>
+
+    <div class="footer__links">
+      <a href={impressum}>Impressum</a>
+      <a href={datenschutz}>Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 32px 0 48px;
+    border-top: 1px solid rgba(241, 235, 222, 0.12);
+  }
+
+  .footer__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer__links {
+    display: flex;
+    gap: 32px;
+  }
+
+  .footer__links a {
+    color: var(--bg);
+    opacity: 0.55;
+    text-decoration: none;
+    font-size: 12px;
+    font-family: var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: opacity 120ms ease, color 120ms ease;
+  }
+
+  .footer__links a:hover,
+  .footer__links a:focus-visible {
+    opacity: 1;
+    color: var(--accent);
+  }
+</style>

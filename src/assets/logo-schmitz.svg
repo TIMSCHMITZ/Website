@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200" font-family="Manrope, system-ui, sans-serif" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+  <title>Schmitz Systemarchitektur — Wortmarke W1 (Architekten-Plakette)</title>
+
+  
+  
+  <g transform="translate(40,55)">
+    <rect x="0" y="0" width="320" height="90" fill="none" stroke="#16223a" stroke-width="2"></rect>
+
+    
+    <rect x="312" y="-8" width="16" height="16" fill="#b85a3f"></rect>
+
+    
+    <text x="22" y="34" fill="#16223a" fill-opacity="0.7" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="14" font-weight="500" letter-spacing="2.8">TIM SCHMITZ</text>
+
+    
+    <text x="22" y="74" fill="#16223a" font-size="34" font-weight="700" letter-spacing="-0.75">Systemarchitektur</text>
+  </g>
+</svg>

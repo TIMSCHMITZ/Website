@@ -1,0 +1,105 @@
+---
+import MonoMarker from '../brand/MonoMarker.astro';
+import { faq } from '../../data/faq';
+---
+
+<section id="faq" class="section section--sand faq">
+  <div class="faq__container">
+    <MonoMarker>08 · Häufige Fragen</MonoMarker>
+    <h2 class="faq__h2">
+      Was Inhaber vor dem ersten Gespräch wissen wollen.
+    </h2>
+
+    <div class="faq__list">
+      {faq.map((f, i) => (
+        <details class="faq__item" open={i === 0}>
+          <summary class="faq__q">
+            <span>{f.q}</span>
+            <span class="faq__plus" aria-hidden="true">+</span>
+          </summary>
+          <p class="faq__a">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq__container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding-inline: var(--pad-x);
+  }
+
+  @media (max-width: 720px) {
+    .faq__container { padding-inline: var(--pad-x-mobile); }
+  }
+
+  .faq__h2 {
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    line-height: 1.0;
+    margin: 24px 0 64px;
+    max-width: 760px;
+  }
+
+  .faq__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faq__item {
+    border-top: 1px solid rgba(22, 34, 58, 0.2);
+    padding: 24px 0;
+  }
+
+  .faq__item:last-of-type {
+    border-bottom: 1px solid rgba(22, 34, 58, 0.2);
+  }
+
+  .faq__q {
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__plus {
+    font-family: var(--mono);
+    font-size: 14px;
+    opacity: 0.55;
+    transition: transform 200ms ease;
+    flex: 0 0 auto;
+  }
+
+  details[open] .faq__plus {
+    transform: rotate(45deg);
+  }
+
+  .faq__a {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 16px 0 0;
+    opacity: 0.82;
+    max-width: 720px;
+  }
+
+  @media (max-width: 900px) {
+    .faq__h2 {
+      font-size: 28px;
+      margin: 20px 0 32px;
+    }
+    .faq__q { font-size: 17px; }
+    .faq__a { font-size: 15.5px; }
+  }
+</style>

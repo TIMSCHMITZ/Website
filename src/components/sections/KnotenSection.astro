@@ -1,0 +1,146 @@
+---
+import Knoten from '../brand/Knoten.astro';
+import MonoMarker from '../brand/MonoMarker.astro';
+import Accent from '../brand/Accent.astro';
+import CTA from '../brand/CTA.astro';
+
+const datenTabelle = [
+  ['FORMAT', '120 Minuten Sparring'],
+  ['LIEFERUNG', '1 Report · 4–6 Seiten · innerhalb 5 Werktagen'],
+  ['ORT', 'Mönchengladbach vor Ort · oder per Video'],
+  ['FÜR', 'Geschäftsführer · 10–30 Mitarbeitende'],
+];
+---
+
+<section id="knoten" class="section section--dark knotenblock">
+  <div class="container">
+    <MonoMarker opacity={0.55}>04 · Signature-Produkt</MonoMarker>
+
+    <div class="knotenblock__grid">
+      <div>
+        <h2 class="knotenblock__h2">
+          Der <Accent>Knoten</Accent>.
+        </h2>
+        <p class="knotenblock__lead">
+          Drei Stränge, ein Knoten. 120 Minuten am Tisch. Ein Report. Eine klare Empfehlung.
+        </p>
+
+        <dl class="kv">
+          {datenTabelle.map(([k, v]) => (
+            <>
+              <dt>{k}</dt>
+              <dd>{v}</dd>
+            </>
+          ))}
+        </dl>
+
+        <CTA href="#kontakt" variant="light">Knoten anfragen</CTA>
+      </div>
+
+      <div class="knotenblock__viz">
+        <div class="knotenblock__svg-wrap">
+          <Knoten size={340} variant="light" strokeWidth={4.5} />
+          <div class="knotenblock__caption">
+            <MonoMarker opacity={0.5} size={9}>K1 · Trefoil</MonoMarker>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .knotenblock__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 96px;
+    margin-top: 32px;
+    align-items: center;
+  }
+
+  .knotenblock__h2 {
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+    margin: 0 0 32px;
+  }
+
+  .knotenblock__lead {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.4;
+    opacity: 0.82;
+    margin: 0 0 48px;
+    max-width: 460px;
+  }
+
+  .kv {
+    font-family: var(--mono);
+    font-size: 12px;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    row-gap: 14px;
+    column-gap: 24px;
+    margin: 0 0 48px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(241, 235, 222, 0.18);
+  }
+
+  .kv dt {
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    opacity: 0.55;
+    padding-top: 3px;
+    text-transform: uppercase;
+  }
+
+  .kv dd {
+    font-weight: 500;
+    opacity: 0.92;
+    margin: 0;
+  }
+
+  .knotenblock__viz {
+    display: flex;
+    justify-content: center;
+  }
+
+  .knotenblock__svg-wrap {
+    position: relative;
+  }
+
+  .knotenblock__caption {
+    position: absolute;
+    bottom: -36px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .knotenblock__grid {
+      grid-template-columns: 1fr;
+      gap: 56px;
+    }
+    .knotenblock__h2 {
+      font-size: 40px;
+      margin: 0 0 20px;
+    }
+    .knotenblock__lead {
+      font-size: 17px;
+      margin: 0 0 32px;
+    }
+    .kv {
+      grid-template-columns: 82px 1fr;
+      column-gap: 16px;
+      row-gap: 12px;
+      margin: 0 0 32px;
+      padding-top: 20px;
+    }
+    .knotenblock__svg-wrap :global(svg) {
+      width: 140px !important;
+      height: 140px !important;
+    }
+  }
+</style>
