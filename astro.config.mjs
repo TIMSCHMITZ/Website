@@ -1,8 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://timschmitz.github.io',
-  base: '/Website/',
+  site: 'https://schmitz-systemarchitektur.de',
   output: 'static',
   build: { assets: 'assets' },
 });
