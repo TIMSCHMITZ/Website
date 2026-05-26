@@ -12,7 +12,7 @@ export const navItems: NavItem[] = [
 ];
 
 export const contact = {
-  cal: 'https://cal.com/tim-schmitz',
+  cal: 'https://calendly.com/schmitz-systemarchitektur-info/15-min-gesprach-passt-der-knoten',
   email: 'tim@schmitz-systemarchitektur.de',
   phone: '+49 163 727 1007',
   web: 'schmitz-systemarchitektur.de',
