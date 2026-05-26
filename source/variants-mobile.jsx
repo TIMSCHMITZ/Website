@@ -109,7 +109,7 @@ function VariantAMobile({ claim, claimAccent, showPricing }) {
               textWrap: "pretty",
             }}
           >
-            Ich finde die Lösung, die Ihr Team wirklich mitträgt — nicht die schönste auf dem Papier.
+            Ich finde mit Ihnen die Lösung, die Ihr Team wirklich mitträgt — nicht die schönste auf dem Papier.
           </p>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <CTA href="#" variant="light">Den Knoten kennenlernen</CTA>
@@ -125,10 +125,42 @@ function VariantAMobile({ claim, claimAccent, showPricing }) {
           <h2 style={{ fontSize: 24, fontWeight: 600, letterSpacing: "-0.018em", lineHeight: 1.1, margin: "0 0 16px", textWrap: "balance" }}>
             Bevor jemand Software kauft, schaue ich, was <Accent>wirklich klemmt</Accent>.
           </h2>
-          <p style={{ fontSize: 14, lineHeight: 1.6, margin: 0, opacity: 0.82 }}>
-            Sparringspartner für Geschäftsführer im Mittelstand — Handwerk und Service, 10–30 Mitarbeitende.
-            120 Minuten an einem Tisch. Ein Report. Eine klare Empfehlung.
-          </p>
+          <div style={{ fontSize: 14, lineHeight: 1.6, opacity: 0.88 }}>
+            <p style={{ margin: "0 0 14px" }}>
+              Wann haben Sie zuletzt Geld in eine Lösung gesteckt, die Ihr Team nie wirklich
+              angenommen hat? Nicht weil die Menschen schwierig sind. Sondern weil das eigentliche
+              Problem woanders saß.
+            </p>
+            <p style={{ margin: "0 0 14px" }}>
+              Das schmerzt mich. Nicht als Kritik — sondern weil ich weiß, was möglich wäre, wenn
+              der Knoten vorher gefunden worden wäre.
+            </p>
+            <p style={{ margin: "0 0 14px" }}>
+              Mein Vater hat mir nie erklärt, wie Dinge funktionieren. Er hat es mir gezeigt.
+              Anfassen, ausprobieren, verstehen — nicht nur wissen. Dieser Unterschied hat mich
+              geprägt, lange bevor ich wusste, dass er mal meine Arbeit definieren würde.
+            </p>
+            <p style={{ margin: "0 0 14px" }}>
+              Nach meiner Ausbildung zum Informationstechnischen Assistenten und einem Studium,
+              das mir beibrachte, komplexe Probleme in handhabbare Teile zu zerlegen, habe ich für
+              Unternehmen Lösungen gebaut — Industrie, Handwerk, Mittelstand. Ich habe nie mit der
+              Frage angefangen, welches Tool hier passt. Immer zuerst: Was ist eigentlich das
+              Problem? Meine ersten Kunden kamen nicht durch Akquise. Sie wurden weiterempfohlen
+              — weil die Lösungen von den Mitarbeitern wirklich getragen wurden.
+            </p>
+            <p style={{ margin: "0 0 14px" }}>
+              Den Moment, der alles verändert hat, werde ich nicht vergessen. Ein Workshop, der
+              perfekt gelaufen war. Problem klar, Lösung gut durchdacht, Umsetzung sauber. Und
+              dann nutzte sie keiner. Nicht weil die Software schlecht war. Sondern weil das
+              eigentliche Problem tiefer lag — an einer Stelle, die kein Tool der Welt hätte
+              lösen können.
+            </p>
+            <p style={{ margin: 0 }}>
+              Seitdem ist meine Arbeit eine andere. Ich verkaufe keine Software. Ich stelle
+              Fragen. Ich finde den Knoten, der unter der Oberfläche liegt — bevor Geld fließt.
+              Denn Technik löst Probleme. Aber nur die richtigen.
+            </p>
+          </div>
         </div>
 
         {/* 3 Prinzipien — stacked */}
@@ -272,7 +304,7 @@ function VariantBMobile({ claim, claimAccent, showPricing }) {
 
         <div style={{ padding: "24px 22px 36px", borderBottom: "1px solid rgba(22,34,58,0.2)", marginTop: 24 }}>
           <p style={{ fontSize: 17, lineHeight: 1.35, fontWeight: 500, letterSpacing: "-0.012em", margin: "0 0 22px", textWrap: "pretty" }}>
-            Ich finde die Lösung, die Ihr Team wirklich mitträgt — nicht die schönste auf dem Papier.
+            Ich finde mit Ihnen die Lösung, die Ihr Team wirklich mitträgt — nicht die schönste auf dem Papier.
           </p>
           <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
             <CTA href="#" variant="dark">Knoten kennenlernen</CTA>
@@ -444,7 +476,7 @@ function VariantCMobile({ claim, claimAccent, showPricing }) {
           </div>
 
           <p style={{ fontSize: 14.5, lineHeight: 1.55, margin: "0 0 22px", opacity: 0.85, textWrap: "pretty" }}>
-            Ich finde die Lösung, die Ihr Team wirklich mitträgt — nicht die schönste auf dem Papier.
+            Ich finde mit Ihnen die Lösung, die Ihr Team wirklich mitträgt — nicht die schönste auf dem Papier.
             Vor der Technik die richtigen Fragen.
           </p>
           <CTA href="#" variant="dark">Den Knoten kennenlernen</CTA>

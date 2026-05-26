@@ -103,7 +103,7 @@ function VariantA({ claim, claimAccent, showPricing }) {
               textWrap: "pretty",
             }}
           >
-            Ich finde die Lösung, die Ihr Team wirklich mitträgt — nicht die schönste auf dem Papier.
+            Ich finde mit Ihnen die Lösung, die Ihr Team wirklich mitträgt — nicht die schönste auf dem Papier.
             Sparring für Inhaber und Geschäftsführer in Handwerk und Dienstleistung.
           </p>
           <div style={{ display: "flex", gap: 24, justifyContent: "center", alignItems: "center" }}>
@@ -158,16 +158,38 @@ function VariantA({ claim, claimAccent, showPricing }) {
               </h2>
               <div style={{ marginTop: 36, fontSize: 17, lineHeight: 1.6, maxWidth: 540, color: c.ink }}>
                 <p style={{ margin: "0 0 18px" }}>
-                  Mein Name ist Tim Schmitz. Ich bin Sparringspartner für Geschäftsführer im Mittelstand
-                  — überwiegend Handwerk und Dienstleistung, 10 bis 30 Mitarbeitende.
+                  Wann haben Sie zuletzt Geld in eine Lösung gesteckt, die Ihr Team nie wirklich
+                  angenommen hat? Nicht weil die Menschen schwierig sind. Sondern weil das eigentliche
+                  Problem woanders saß.
                 </p>
                 <p style={{ margin: "0 0 18px" }}>
-                  Ich verkaufe keine Software. Ich verkaufe Klarheit. Wir setzen uns 120 Minuten an einen
-                  Tisch und gehen Ihren Betrieb durch — Prozesse, Menschen, was läuft, was hakt.
+                  Das schmerzt mich. Nicht als Kritik — sondern weil ich weiß, was möglich wäre, wenn
+                  der Knoten vorher gefunden worden wäre.
+                </p>
+                <p style={{ margin: "0 0 18px" }}>
+                  Mein Vater hat mir nie erklärt, wie Dinge funktionieren. Er hat es mir gezeigt.
+                  Anfassen, ausprobieren, verstehen — nicht nur wissen. Dieser Unterschied hat mich
+                  geprägt, lange bevor ich wusste, dass er mal meine Arbeit definieren würde.
+                </p>
+                <p style={{ margin: "0 0 18px" }}>
+                  Nach meiner Ausbildung zum Informationstechnischen Assistenten und einem Studium,
+                  das mir beibrachte, komplexe Probleme in handhabbare Teile zu zerlegen, habe ich für
+                  Unternehmen Lösungen gebaut — Industrie, Handwerk, Mittelstand. Ich habe nie mit der
+                  Frage angefangen, welches Tool hier passt. Immer zuerst: Was ist eigentlich das
+                  Problem? Meine ersten Kunden kamen nicht durch Akquise. Sie wurden weiterempfohlen
+                  — weil die Lösungen von den Mitarbeitern wirklich getragen wurden.
+                </p>
+                <p style={{ margin: "0 0 18px" }}>
+                  Den Moment, der alles verändert hat, werde ich nicht vergessen. Ein Workshop, der
+                  perfekt gelaufen war. Problem klar, Lösung gut durchdacht, Umsetzung sauber. Und
+                  dann nutzte sie keiner. Nicht weil die Software schlecht war. Sondern weil das
+                  eigentliche Problem tiefer lag — an einer Stelle, die kein Tool der Welt hätte
+                  lösen können.
                 </p>
                 <p style={{ margin: 0 }}>
-                  Am Ende bekommen Sie einen Report. Lesbar. Auf den Punkt. Mit einer klaren Empfehlung,
-                  was Sie als nächstes anpacken — und genauso wichtig: was Sie sein lassen.
+                  Seitdem ist meine Arbeit eine andere. Ich verkaufe keine Software. Ich stelle
+                  Fragen. Ich finde den Knoten, der unter der Oberfläche liegt — bevor Geld fließt.
+                  Denn Technik löst Probleme. Aber nur die richtigen.
                 </p>
               </div>
             </div>
@@ -667,14 +689,13 @@ function VariantA({ claim, claimAccent, showPricing }) {
                 textWrap: "balance",
               }}
             >
-              Familie im Handwerk. <Accent>Zwei Jahrzehnte in IT-Projekten.</Accent>
+              <Accent>Zwei Jahrzehnte</Accent> in IT-Projekten.
             </h2>
             <div style={{ display: "grid", rowGap: 24 }}>
               {[
                 ["seit 2025", "Schmitz Systemarchitektur", "Sparring für Geschäftsführer im Mittelstand — Mönchengladbach · Remote."],
                 ["2018 – 2024", "Geschäftsführer · IT-Projekte", "Verantwortung für Digitalisierungsprojekte in Handel und Service. 15+ Jahre Projekt­erfahrung."],
                 ["2010 – 2018", "Projektleitung & Strategie", "Mittelstand und Konzern. ERP-Einführungen, Prozess­design, Change-Begleitung."],
-                ["Davor", "Aufgewachsen mit dem Handwerk", "Familie im Handwerk. Werkstatt­luft kenne ich, bevor ich PowerPoint kannte."],
               ].map(([when, what, body]) => (
                 <div key={when} style={{ display: "grid", gridTemplateColumns: "150px 1fr", gap: 24, paddingTop: 18, borderTop: `1px solid rgba(22,34,58,0.18)` }}>
                   <div
