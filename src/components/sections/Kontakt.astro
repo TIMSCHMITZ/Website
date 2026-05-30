@@ -3,7 +3,7 @@ import MonoMarker from '../brand/MonoMarker.astro';
 import Accent from '../brand/Accent.astro';
 import CTA from '../brand/CTA.astro';
 import CTAGhost from '../brand/CTAGhost.astro';
-import Plakette from '../brand/Plakette.astro';
+import Logo from '../brand/Logo.astro';
 import { contact } from '../../data/nav';
 
 const kontaktDaten = [
@@ -34,7 +34,7 @@ const kontaktDaten = [
       </div>
 
       <div class="kontakt__card">
-        <Plakette size="md" variant="light" />
+        <Logo size={120} />
         <dl class="kontakt__kv">
           {kontaktDaten.map(([k, v]) => (
             <>

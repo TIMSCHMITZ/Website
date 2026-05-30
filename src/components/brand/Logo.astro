@@ -1,0 +1,30 @@
+---
+interface Props {
+  size?: number;
+  class?: string;
+}
+
+// Volle Wortmarke (Mitternacht-Platte + Knoten + Schriftzug), als ein Asset
+// aus public/logo.svg — quadratisch, daher width = height.
+const { size = 48, class: className } = Astro.props;
+---
+
+<img
+  src="/logo.svg"
+  alt="Schmitz Systemarchitektur"
+  width={size}
+  height={size}
+  class={['logo', className].filter(Boolean).join(' ')}
+  decoding="async"
+  draggable="false"
+/>
+
+<style>
+  .logo {
+    display: block;
+    width: var(--logo-size, auto);
+    height: auto;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+</style>

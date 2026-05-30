@@ -2,27 +2,37 @@
 interface Props {
   size?: number;
   variant?: 'dark' | 'light';
-  strokeWidth?: number;
   class?: string;
 }
 
-const { size = 120, variant = 'dark', strokeWidth = 6, class: className } = Astro.props;
-const stroke = variant === 'light' ? '#f1ebde' : '#16223a';
-const dotRadius = strokeWidth + 0.5;
+const { size = 120, variant = 'dark', class: className } = Astro.props;
+const bar = variant === 'light' ? '#f1ebde' : '#16223a';
 ---
 
 <svg
   class={className}
-  viewBox="0 0 100 100"
+  viewBox="147.29 147.29 605.42 605.42"
   width={size}
   height={size}
   aria-hidden="true"
   focusable="false"
 >
-  <g fill="none" stroke={stroke} stroke-width={strokeWidth} stroke-linecap="round">
-    <path d="M 30 70 Q 30 30, 70 30" />
-    <path d="M 70 30 Q 50 70, 30 70" />
-    <path d="M 50 22 L 50 78" />
+  <g fill={bar}>
+    <rect x="147.29" y="635.53" width="404.04" height="93.56" />
+    <rect
+      x="409.17"
+      y="463.01"
+      width="404.04"
+      height="93.56"
+      transform="translate(475.3 1293.99) rotate(-120)"
+    />
+    <rect
+      x="128.82"
+      y="322.47"
+      width="404.04"
+      height="93.56"
+      transform="translate(816.04 267.36) rotate(120)"
+    />
   </g>
-  <circle cx="50" cy="50" r={dotRadius} fill="#b85a3f" />
+  <circle cx="428.76" cy="520.66" r="53.04" fill="#b85a3f" />
 </svg>

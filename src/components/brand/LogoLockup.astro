@@ -1,0 +1,68 @@
+---
+import Knoten from './Knoten.astro';
+
+interface Props {
+  variant?: 'dark' | 'light';
+  markSize?: number;
+  class?: string;
+}
+
+// Horizontales Lockup: neue Knoten-Marke + zweizeilige Wortmarke.
+// Textbehandlung kanonisch aus logo-schmitz.svg / Plakette übernommen.
+const { variant = 'light', markSize = 40, class: className } = Astro.props;
+---
+
+<span class={['lockup', `lockup--${variant}`, className].filter(Boolean).join(' ')}>
+  <Knoten size={markSize} variant={variant} />
+  <span class="lockup__text">
+    <span class="lockup__sub">Tim Schmitz</span>
+    <span class="lockup__main">Systemarchitektur</span>
+  </span>
+</span>
+
+<style>
+  .lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    line-height: 1;
+  }
+
+  .lockup--dark {
+    color: var(--ink);
+  }
+  .lockup--light {
+    color: var(--bg);
+  }
+
+  .lockup__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-family: var(--font);
+  }
+
+  .lockup__sub {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .lockup__main {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.022em;
+    line-height: 1;
+  }
+
+  /* Auf sehr schmalen Viewports nur die Marke zeigen, damit nichts mit
+     dem Burger kollidiert. */
+  @media (max-width: 420px) {
+    .lockup__text {
+      display: none;
+    }
+  }
+</style>

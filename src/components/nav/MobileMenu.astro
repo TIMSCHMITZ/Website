@@ -1,6 +1,5 @@
 ---
-import Plakette from '../brand/Plakette.astro';
-import Knoten from '../brand/Knoten.astro';
+import Logo from '../brand/Logo.astro';
 import { navItems, contact } from '../../data/nav';
 
 interface Props {
@@ -20,9 +19,8 @@ const { homeHref = '#' } = Astro.props;
 
   <div class="menu__footer">
     <a class="menu__brand" href={homeHref} data-menu-link aria-label="Start">
-      <Plakette size="sm" variant="light" />
+      <Logo size={72} />
     </a>
-    <Knoten size={64} variant="light" strokeWidth={6} />
   </div>
 
   <div class="menu__contact">

@@ -1,5 +1,5 @@
 ---
-import Plakette from '../brand/Plakette.astro';
+import LogoLockup from '../brand/LogoLockup.astro';
 import CTA from '../brand/CTA.astro';
 import { navItems } from '../../data/nav';
 
@@ -13,7 +13,7 @@ const { variant = 'light', homeHref = '#' } = Astro.props;
 
 <nav class={`topnav topnav--${variant}`} aria-label="Hauptnavigation">
   <a href={homeHref} class="topnav__brand" aria-label="Schmitz Systemarchitektur — Start">
-    <Plakette size="sm" variant={variant} />
+    <LogoLockup variant={variant} />
   </a>
 
   <div class="topnav__desktop">
