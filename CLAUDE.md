@@ -4,21 +4,38 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-A **design handoff**, not (yet) a built website. The target is a personal-brand single-page site for **Schmitz Systemarchitektur** (Inhaber: Tim Schmitz) at `schmitz-systemarchitektur.de`. German (Sie-Form), one-pager with anchor navigation.
+A personal-brand single-page site for **Schmitz Systemarchitektur** (Inhaber: Tim Schmitz) at `schmitz-systemarchitektur.de`. German (Sie-Form), one-pager with anchor navigation, plus two legal sub-pages (Impressum, Datenschutz).
 
-There is currently **no build system, no package.json, no tests, no lint config**. The next major piece of work is to rebuild `source/variant-a.jsx` in a production stack — Astro is the recommended target (see `README.md` §Tech-Stack-Empfehlung). Do not invent build/test commands; if you need them, the project hasn't been initialized yet and you should ask before scaffolding.
+The site is **built and deployed** — a static **Astro** project lives in `src/`. It is served from a custom domain via GitHub Pages: every push to `main` runs `.github/workflows/deploy.yml` (build → `actions/upload-pages-artifact` → `actions/deploy-pages`). `astro.config.mjs` sets `site` and `output: 'static'` with **no `base`** (custom domain at root).
 
-## Files in `source/`
+## Commands
 
-These JSX files are **design references, not production code**. They are hi-fi pixel-accurate mockups using inline styles, intended to be read for exact measurements, colors, and copy when reimplementing in the production stack.
+```bash
+npm run dev       # local dev server (astro dev)
+npm run build     # static build → dist/
+npm run preview   # serve the built dist/ locally
+```
 
-- `shared.jsx` — brand primitives (`Knoten`, `Plakette`, `MonoMarker`, `CTA`, `CTAGhost`, `Accent`, `Portrait`, `Divider`, `PageBase`). Attaches components to `window.*` (no module system) — this is intentional for the preview-only context.
-- `variant-a.jsx` — desktop implementation of the chosen design direction "A · Atelier". Maßgebliche Quelle for layout, copy, and pixel values.
-- `variants-mobile.jsx` — mobile (`VariantAMobile`).
-- `tim-portrait.png` (1200×1123) — real portrait, must be optimized to WebP (~120 KB) before shipping.
-- `Logo - Schmitz Systemarchitektur.svg`, `Visitenkarte - *.svg` — print/asset references.
+Node 20 (`.nvmrc`). No test or lint setup exists — don't invent one; ask before scaffolding. `npm run build` is the closest thing to a CI check (it type-checks `.astro` files and fails on broken imports/types).
 
-When rebuilding in production: first port `shared.jsx` as a component library, then walk `variant-a.jsx` section by section. The inline pixel values in the JSX are authoritative — prefer them over any summary in `README.md` if they disagree.
+## Architecture (`src/`)
+
+- `pages/index.astro` — the one-pager. Imports `BaseLayout` and renders the section components in order (Hero → WerIchBin → Prinzipien → KnotenSection → Ablauf → Stimmen → Cases → Faq → Werdegang → Kontakt → Footer). `MobileMenu` is rendered once near the top.
+- `pages/impressum.astro`, `pages/datenschutz.astro` — legal pages using `LegalLayout`.
+- `layouts/BaseLayout.astro` — `<html>` shell, SEO/OG meta, and **self-hosted fonts** imported via `@fontsource/manrope` and `@fontsource/ibm-plex-mono` (specific weights + latin/latin-ext subsets). Also imports `styles/global.css`. (Note: the site no longer uses the Google Fonts CDN that `README.md` describes.)
+- `layouts/LegalLayout.astro` — BaseLayout + TopNav + MobileMenu + Footer, with scoped typography for legal prose (uses `:global()` for slotted markdown-ish content).
+- `components/sections/*.astro` — one file per numbered section. Each owns its markup + scoped `<style>`; pixel values live inline here, ported from `source/variant-a.jsx`.
+- `components/brand/*.astro` — the brand primitives, ported from `source/shared.jsx`: `Knoten` (inline SVG, `dark`/`light` variants), `Plakette`, `MonoMarker`, `CTA`, `CTAGhost`, `Accent`, `Portrait`, `Divider`.
+- `components/nav/` — `TopNav.astro` (static, not sticky) and `MobileMenu.astro` (Mitternacht overlay; toggles `body[data-menu-open='true']`).
+- `data/*.ts` — typed content arrays consumed by sections (`prinzipien`, `ablauf`, `stimmen`, `cases`, `faq`, `werdegang`, `nav`). Edit copy here, not in markup, for list-driven sections. `data/nav.ts` also exports the `contact` object (Calendly link, email, phone) used across nav/contact/footer.
+- `styles/global.css` — design tokens as CSS custom properties (`--ink`, `--bg`, `--sand`, `--steel`, `--accent`, layout vars) and base resets. **It enforces `border-radius: 0 !important` on `*, *::before, *::after` globally** — the no-rounded-corners rule is structural, not per-component. Utility classes: `.container`, `.section`, `.section--dark`, `.section--sand`, `.mono`.
+- `assets/` — `tim-portrait.png` and `logo-schmitz.svg`. The portrait is rendered through Astro's `astro:assets` `<Image>` (`Portrait.astro`) which emits responsive WebP at build time — do **not** hand-optimize it.
+
+Conventions: every component is a `.astro` file with a frontmatter `interface Props`, styles are component-scoped `<style>` blocks (use `:global()` only deliberately), shared values come from the CSS custom properties in `global.css`.
+
+## `source/` — design reference only
+
+`source/` holds the original hi-fi JSX mockups (`shared.jsx`, `variant-a.jsx`, `variants-mobile.jsx`) plus the portrait and print SVGs. These are **not** built or shipped (`tsconfig.json` excludes `source/`). They remain the authoritative source for exact pixel values, colors, and final copy — when a section's measurements are unclear, read `variant-a.jsx`. If a value in `source/` conflicts with `README.md`, the JSX wins.
 
 ## Non-negotiable brand rules
 
@@ -35,11 +52,11 @@ These come from `CI Guidelines.md` and `README.md` — violating them breaks the
 
 ## Copy & content state
 
-- The German copy in `variant-a.jsx` is **final and must be carried over 1:1** when rebuilding.
-- Two blocks are deliberate placeholders that will be replaced before launch — do not treat them as final: **Stimmen (section 06)** and **Cases (section 07)**.
+- The German copy is **final**; the canonical text lives in the section components (and `source/variant-a.jsx`). Carry it over 1:1.
+- Two blocks are deliberate placeholders that will be replaced before launch — do not treat them as final: **Stimmen (section 06)** and **Cases (section 07)** (`data/stimmen.ts`, `data/cases.ts`).
 - **Pricing is intentionally hidden** on the site (decision from briefing). Don't add prices to the Knoten data table.
-- `cal.com/tim-schmitz` is a placeholder Cal-Link; the real URL is pending.
-- `Impressum` and `Datenschutz` are the only planned sub-pages; their content is also pending.
+- Booking now goes through a **Calendly** link (`data/nav.ts` → `contact.cal`); contact email is `info@schmitz-systemarchitektur.de`. (The `cal.com/tim-schmitz` and `tim@…` references in `README.md` are stale.)
+- `Impressum` and `Datenschutz` exist as pages (`pages/*.astro`); confirm their legal content is final before launch.
 
 ## Design tokens (quick reference)
 
