@@ -16,5 +16,5 @@ export const contact = {
   email: 'info@schmitz-systemarchitektur.de',
   phone: '+49 163 727 1007',
   web: 'schmitz-systemarchitektur.de',
-  location: 'Mönchengladbach · Remote',
+  location: 'Region Düsseldorf · Remote',
 };

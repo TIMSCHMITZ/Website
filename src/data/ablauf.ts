@@ -13,7 +13,7 @@ export const ablaufSteps: AblaufStep[] = [
   {
     n: '02',
     title: 'Sparring',
-    body: '120 Minuten an einem Tisch — in Mönchengladbach oder per Video. Wir gehen Prozesse, Menschen und offene Fragen durch.',
+    body: '120 Minuten an einem Tisch — bei Ihnen vor Ort in der Region Düsseldorf oder per Video. Wir gehen Prozesse, Menschen und offene Fragen durch.',
   },
   {
     n: '03',

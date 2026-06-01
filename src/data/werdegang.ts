@@ -8,7 +8,7 @@ export const werdegang: WerdegangEntry[] = [
   {
     when: 'seit 2026',
     what: 'Schmitz Systemarchitektur',
-    body: 'Sparring für Geschäftsführer. Fokus auf den Menschen im Betrieb — nicht auf das nächste Tool. Mönchengladbach · Remote.',
+    body: 'Sparring für Geschäftsführer. Fokus auf den Menschen im Betrieb — nicht auf das nächste Tool. Region Düsseldorf · Remote.',
   },
   {
     when: '2021 – 2026',

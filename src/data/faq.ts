@@ -18,7 +18,7 @@ export const faq: FaqEntry[] = [
   },
   {
     q: 'Funktioniert das auch remote?',
-    a: 'Ja. Mönchengladbach vor Ort oder per Video — die Methode bleibt dieselbe. Manche Inhaber bevorzugen vor Ort, weil das Team gleich mit einbezogen werden kann.',
+    a: 'Ja. In der Region Düsseldorf komme ich zu Ihnen, sonst per Video — die Methode bleibt dieselbe. Manche Inhaber bevorzugen vor Ort, weil das Team gleich mit einbezogen werden kann.',
   },
   {
     q: 'Was kostet ein Knoten?',
