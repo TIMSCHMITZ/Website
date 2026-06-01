@@ -5,34 +5,37 @@ interface Props {
   class?: string;
 }
 
+// Knoten-Marke, Geometrie aus knoten.svg übernommen.
+// viewBox 114.15 × 105.24 (nicht quadratisch) — Höhe folgt dem Seitenverhältnis.
 const { size = 120, variant = 'dark', class: className } = Astro.props;
 const bar = variant === 'light' ? '#f1ebde' : '#16223a';
+const height = (size * 105.24) / 114.15;
 ---
 
 <svg
   class={className}
-  viewBox="147.29 147.29 605.42 605.42"
+  viewBox="0 0 114.15 105.24"
   width={size}
-  height={size}
+  height={height}
   aria-hidden="true"
   focusable="false"
 >
   <g fill={bar}>
-    <rect x="147.29" y="635.53" width="404.04" height="93.56" />
+    <rect y="87.6" width="76.18" height="17.64" />
     <rect
-      x="409.17"
-      y="463.01"
-      width="404.04"
-      height="93.56"
-      transform="translate(475.3 1293.99) rotate(-120)"
+      x="49.38"
+      y="55.07"
+      width="76.18"
+      height="17.64"
+      transform="translate(75.87 171.59) rotate(-120)"
     />
     <rect
-      x="128.82"
-      y="322.47"
-      width="404.04"
-      height="93.56"
-      transform="translate(816.04 267.36) rotate(120)"
+      x="-3.48"
+      y="28.58"
+      width="76.18"
+      height="17.64"
+      transform="translate(84.3 26.12) rotate(120)"
     />
   </g>
-  <circle cx="428.76" cy="520.66" r="53.04" fill="#b85a3f" />
+  <circle cx="53.07" cy="65.94" r="10" fill="#b85a3f" />
 </svg>

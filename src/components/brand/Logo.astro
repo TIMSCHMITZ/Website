@@ -1,19 +1,24 @@
 ---
 interface Props {
-  size?: number;
+  width?: number;
+  variant?: 'dark' | 'light';
   class?: string;
 }
 
-// Volle Wortmarke (Mitternacht-Platte + Knoten + Schriftzug), als ein Asset
-// aus public/logo.svg — quadratisch, daher width = height.
-const { size = 48, class: className } = Astro.props;
+// Volle Wortmarke (Knoten + Schriftzug) als ein Asset.
+// variant 'dark'  = dunkle Marke (logo-wordmark-dark.svg) für helle Flächen
+// variant 'light' = helle Marke (logo-wordmark-light.svg) für dunkle Flächen
+const { width = 260, variant = 'light', class: className } = Astro.props;
+const src = variant === 'light' ? '/logo-wordmark-light.svg' : '/logo-wordmark-dark.svg';
+const height = Math.round((width * 179.29) / 759.61);
 ---
 
 <img
-  src="/logo.svg"
+  src={src}
   alt="Schmitz Systemarchitektur"
-  width={size}
-  height={size}
+  width={width}
+  height={height}
+  style={`width:${width}px`}
   class={['logo', className].filter(Boolean).join(' ')}
   decoding="async"
   draggable="false"
@@ -22,7 +27,7 @@ const { size = 48, class: className } = Astro.props;
 <style>
   .logo {
     display: block;
-    width: var(--logo-size, auto);
+    max-width: 100%;
     height: auto;
     user-select: none;
     -webkit-user-drag: none;

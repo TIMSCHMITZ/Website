@@ -1,1 +1,11 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900"><defs><style>.cls-1{fill:#16223a;}.cls-2{fill:#f1ebde;}.cls-3{fill:#b85a3f;}</style></defs><rect class="cls-1" x="-2.23" y="-6.93" width="904.45" height="913.85"/><rect class="cls-2" x="147.29" y="635.53" width="404.04" height="93.56"/><rect class="cls-2" x="409.17" y="463.01" width="404.04" height="93.56" transform="translate(475.3 1293.99) rotate(-120)"/><rect class="cls-2" x="128.82" y="322.47" width="404.04" height="93.56" transform="translate(816.04 267.36) rotate(120)"/><circle class="cls-3" cx="428.76" cy="520.66" r="53.04"/></svg>
+<svg id="favicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140">
+  <rect width="140" height="140" fill="#16223a" />
+  <g transform="translate(12.925, 17.38)">
+    <g fill="#f1ebde">
+      <rect y="87.6" width="76.18" height="17.64" />
+      <rect x="49.38" y="55.07" width="76.18" height="17.64" transform="translate(75.87 171.59) rotate(-120)" />
+      <rect x="-3.48" y="28.58" width="76.18" height="17.64" transform="translate(84.3 26.12) rotate(120)" />
+    </g>
+    <circle cx="53.07" cy="65.94" r="10" fill="#b85a3f" />
+  </g>
+</svg>
