@@ -14,6 +14,7 @@ import '@fontsource/ibm-plex-mono/latin-ext-400.css';
 import '@fontsource/ibm-plex-mono/latin-ext-500.css';
 import '@fontsource/ibm-plex-mono/latin-ext-600.css';
 import '../styles/global.css';
+import '../styles/effects.css';
 
 interface Props {
   title?: string;
@@ -61,5 +62,8 @@ const canonicalURL = canonical
   </head>
   <body>
     <slot />
+    <script>
+      import '../scripts/effects.js';
+    </script>
   </body>
 </html>

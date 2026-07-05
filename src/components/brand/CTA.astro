@@ -26,17 +26,29 @@ const { href = '#kontakt', variant = 'dark', rel, target } = Astro.props;
     letter-spacing: -0.005em;
     text-decoration: none;
     border: 0;
-    transition: background 160ms ease, color 160ms ease;
+    position: relative;
+    overflow: hidden;
+    transition: color 200ms ease;
+  }
+
+  /* Hover: Lehm zieht als Fläche von links auf (Experiment-Branch). */
+  .cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cta:hover::after,
+  .cta:focus-visible::after {
+    transform: scaleX(1);
   }
 
   .cta--dark {
     background: var(--ink);
-    color: var(--bg);
-  }
-
-  .cta--dark:hover,
-  .cta--dark:focus-visible {
-    background: var(--accent);
     color: var(--bg);
   }
 
@@ -47,8 +59,13 @@ const { href = '#kontakt', variant = 'dark', rel, target } = Astro.props;
 
   .cta--light:hover,
   .cta--light:focus-visible {
-    background: var(--accent);
     color: var(--bg);
+  }
+
+  .cta-label,
+  .cta-dot {
+    position: relative;
+    z-index: 1;
   }
 
   .cta-dot {
@@ -56,6 +73,7 @@ const { href = '#kontakt', variant = 'dark', rel, target } = Astro.props;
     height: 6px;
     background: var(--accent);
     display: inline-block;
+    transition: background 200ms ease;
   }
 
   .cta--dark:hover .cta-dot,

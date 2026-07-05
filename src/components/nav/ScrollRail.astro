@@ -1,0 +1,94 @@
+---
+import { navItems } from '../../data/nav';
+
+// Fixe Abschnitts-Leiste am linken Rand (Experiment-Branch).
+// Erscheint nach dem Hero, aktiver Abschnitt wird per JS markiert
+// (src/scripts/effects.js). Ohne JS bleibt sie ausgeblendet.
+---
+
+<nav class="rail" aria-label="Abschnitte">
+  {
+    navItems.map((item) => (
+      <a class="rail__item" href={item.href}>
+        <span class="rail__dot" aria-hidden="true" />
+        <span class="rail__label">{item.label}</span>
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  .rail {
+    position: fixed;
+    left: 28px;
+    top: 50%;
+    z-index: 5;
+    display: none;
+    flex-direction: column;
+    gap: 22px;
+    transform: translateY(-50%);
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+  }
+
+  :global(html.js) .rail {
+    display: flex;
+  }
+
+  :global(html.js) .rail:not(.is-visible) {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-50%) translateX(-10px);
+  }
+
+  .rail__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--steel);
+  }
+
+  .rail__dot {
+    width: 7px;
+    height: 7px;
+    flex: none;
+    background: currentColor;
+    opacity: 0.45;
+    transition: opacity 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  }
+
+  .rail__label {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .rail__item:hover .rail__dot,
+  .rail__item:focus-visible .rail__dot {
+    opacity: 0.9;
+  }
+
+  .rail__item:hover .rail__label,
+  .rail__item:focus-visible .rail__label,
+  .rail__item.is-active .rail__label {
+    opacity: 0.8;
+    transform: none;
+  }
+
+  .rail__item.is-active .rail__dot {
+    background: var(--accent);
+    opacity: 1;
+    transform: scale(1.3);
+  }
+
+  @media (max-width: 1279px) {
+    :global(html.js) .rail {
+      display: none;
+    }
+  }
+</style>

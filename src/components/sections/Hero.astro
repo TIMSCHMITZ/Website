@@ -8,11 +8,15 @@ import TopNav from '../nav/TopNav.astro';
 ---
 
 <section class="hero" id="top">
+  <div class="hero__ghost" data-parallax="0.18" aria-hidden="true">
+    <Knoten size={920} variant="light" />
+  </div>
+
   <TopNav variant="light" />
 
   <div class="hero__inner">
     <div class="hero__knoten">
-      <Knoten size={170} variant="light" />
+      <Knoten size={170} variant="light" animate="load" />
     </div>
 
     <MonoMarker opacity={0.55} size={11}>01 · Sparring für Geschäftsführer</MonoMarker>
@@ -91,6 +95,68 @@ import TopNav from '../nav/TopNav.astro';
     position: absolute;
     bottom: 32px;
     right: var(--pad-x);
+  }
+
+  .hero__ghost {
+    position: absolute;
+    top: -140px;
+    right: -220px;
+    opacity: 0.05;
+    pointer-events: none;
+    transform: translateY(var(--par, 0px));
+  }
+
+  .hero__ghost :global(svg) {
+    animation: ghost-spin 240s linear infinite;
+  }
+
+  @keyframes ghost-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Ladesequenz: Nav senkt sich, Inhalt steigt gestaffelt auf,
+     nachdem der Knoten sich zusammengesetzt hat. Die to-Keyframes
+     lassen opacity aus, damit inline-/Klassen-Opacities (MonoMarker,
+     Lead) nach der Animation wieder gelten. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero > :global(.topnav) {
+      animation: hero-drop 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+    }
+
+    .hero__inner > :global(*:not(.hero__knoten)) {
+      animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .hero__inner > :global(*:nth-child(2)) { animation-delay: 0.75s; }
+    .hero__inner > :global(*:nth-child(3)) { animation-delay: 0.9s; }
+    .hero__inner > :global(*:nth-child(4)) { animation-delay: 1.1s; }
+    .hero__inner > :global(*:nth-child(5)) { animation-delay: 1.25s; }
+
+    .hero__stamp {
+      animation: hero-rise 0.9s ease 1.6s both;
+    }
+  }
+
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(26px);
+      filter: blur(6px);
+    }
+    to {
+      transform: none;
+      filter: none;
+    }
+  }
+
+  @keyframes hero-drop {
+    from {
+      opacity: 0;
+      transform: translateY(-16px);
+    }
+    to {
+      transform: none;
+    }
   }
 
   @media (max-width: 720px) {

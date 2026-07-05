@@ -2,18 +2,25 @@
 interface Props {
   size?: number;
   variant?: 'dark' | 'light';
+  animate?: 'load' | 'scroll';
   class?: string;
 }
 
 // Knoten-Marke, Geometrie aus source/knoten.svg übernommen.
 // viewBox 114.15 × 105.24 (nicht quadratisch) — Höhe folgt dem Seitenverhältnis.
-const { size = 120, variant = 'dark', class: className } = Astro.props;
+// animate="load": Balken fliegen beim Laden ein und rasten zum Knoten zusammen.
+// animate="scroll": gleiche Sequenz, pausiert bis ein Vorfahre .is-in trägt
+// (JS-gated — ohne JS bleibt der Knoten statisch montiert).
+const { size = 120, variant = 'dark', animate, class: className } = Astro.props;
 const bar = variant === 'light' ? '#f1ebde' : '#16223a';
 const height = (size * 105.24) / 114.15;
+const cls = [className, animate && `knoten-anim knoten-anim--${animate}`]
+  .filter(Boolean)
+  .join(' ');
 ---
 
 <svg
-  class={className}
+  class={cls}
   viewBox="0 0 114.15 105.24"
   width={size}
   height={height}
@@ -21,21 +28,132 @@ const height = (size * 105.24) / 114.15;
   focusable="false"
 >
   <g fill={bar}>
-    <rect y="87.6" width="76.18" height="17.64" />
-    <rect
-      x="49.38"
-      y="55.07"
-      width="76.18"
-      height="17.64"
-      transform="translate(75.87 171.59) rotate(-120)"
-    />
-    <rect
-      x="-3.48"
-      y="28.58"
-      width="76.18"
-      height="17.64"
-      transform="translate(84.3 26.12) rotate(120)"
-    />
+    <g class="k-bar k-bar--1">
+      <rect y="87.6" width="76.18" height="17.64" />
+    </g>
+    <g class="k-bar k-bar--2">
+      <rect
+        x="49.38"
+        y="55.07"
+        width="76.18"
+        height="17.64"
+        transform="translate(75.87 171.59) rotate(-120)"
+      />
+    </g>
+    <g class="k-bar k-bar--3">
+      <rect
+        x="-3.48"
+        y="28.58"
+        width="76.18"
+        height="17.64"
+        transform="translate(84.3 26.12) rotate(120)"
+      />
+    </g>
   </g>
-  <circle cx="53.07" cy="65.94" r="10" fill="#b85a3f" />
+  <circle class="k-dot" cx="53.07" cy="65.94" r="10" fill="#b85a3f" />
+  {
+    animate && (
+      <circle
+        class="k-pulse"
+        cx="53.07"
+        cy="65.94"
+        r="10"
+        fill="none"
+        stroke="#b85a3f"
+        stroke-width="1.5"
+      />
+    )
+  }
 </svg>
+
+<style>
+  .knoten-anim {
+    overflow: visible;
+  }
+
+  .knoten-anim .k-bar,
+  .knoten-anim .k-dot,
+  .knoten-anim .k-pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .k-bar--1 { --kx: -64px; --ky: 44px; --kr: -16deg; }
+  .k-bar--2 { --kx: 58px;  --ky: 36px; --kr: 14deg; }
+  .k-bar--3 { --kx: 20px;  --ky: -66px; --kr: -20deg; }
+
+  /* Ladevariante: läuft sofort, rein CSS — funktioniert auch ohne JS. */
+  .knoten-anim--load .k-bar {
+    animation: k-bar-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .knoten-anim--load .k-bar--2 { animation-delay: 0.15s; }
+  .knoten-anim--load .k-bar--3 { animation-delay: 0.3s; }
+  .knoten-anim--load .k-dot {
+    animation: k-dot-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.85s both;
+  }
+  .knoten-anim--load .k-pulse {
+    animation: k-pulse-out 1s ease-out 1.05s both;
+  }
+
+  /* Scrollvariante: nur mit JS aktiv, startet wenn ein Vorfahre .is-in erhält. */
+  :global(html.js) .knoten-anim--scroll .k-bar {
+    animation: k-bar-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both paused;
+  }
+  :global(html.js) .knoten-anim--scroll .k-bar--2 { animation-delay: 0.15s; }
+  :global(html.js) .knoten-anim--scroll .k-bar--3 { animation-delay: 0.3s; }
+  :global(html.js) .knoten-anim--scroll .k-dot {
+    animation: k-dot-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.85s both paused;
+  }
+  :global(html.js) .knoten-anim--scroll .k-pulse {
+    animation: k-pulse-out 1s ease-out 1.05s both paused;
+  }
+
+  :global(html.js .is-in) .knoten-anim--scroll .k-bar,
+  :global(html.js .is-in) .knoten-anim--scroll .k-dot,
+  :global(html.js .is-in) .knoten-anim--scroll .k-pulse {
+    animation-play-state: running;
+  }
+
+  @keyframes k-bar-in {
+    from {
+      opacity: 0;
+      transform: translate(var(--kx), var(--ky)) rotate(var(--kr));
+    }
+    45% {
+      opacity: 1;
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes k-dot-in {
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
+    70% {
+      opacity: 1;
+      transform: scale(1.25);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes k-pulse-out {
+    0% {
+      opacity: 0;
+      transform: scale(1);
+    }
+    15% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(3);
+    }
+  }
+</style>
