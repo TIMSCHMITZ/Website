@@ -26,10 +26,11 @@ Node 20 (`.nvmrc`). No test or lint setup exists — don't invent one; ask befor
 - `layouts/LegalLayout.astro` — BaseLayout + TopNav + MobileMenu + Footer, with scoped typography for legal prose (uses `:global()` for slotted markdown-ish content).
 - `components/sections/*.astro` — one file per numbered section. Each owns its markup + scoped `<style>`; pixel values live inline here, ported from `source/variant-a.jsx`.
 - `components/brand/*.astro` — the brand primitives, ported from `source/shared.jsx`: `Knoten` (inline SVG, `dark`/`light` variants), `Plakette`, `MonoMarker`, `CTA`, `CTAGhost`, `Accent`, `Portrait`, `Divider`.
-- `components/nav/` — `TopNav.astro` (static, not sticky) and `MobileMenu.astro` (Mitternacht overlay; toggles `body[data-menu-open='true']`).
+- `components/nav/` — `TopNav.astro` (static, not sticky), `MobileMenu.astro` (Mitternacht overlay; toggles `body[data-menu-open='true']`), and `ScrollRail.astro` (fixed section rail on the left, ≥1280 px viewports only; active state driven by `scripts/effects.js`).
 - `data/*.ts` — typed content arrays consumed by sections (`prinzipien`, `ablauf`, `stimmen`, `cases`, `faq`, `werdegang`, `nav`). Edit copy here, not in markup, for list-driven sections. `data/nav.ts` also exports the `contact` object (Calendly link, email, phone) used across nav/contact/footer.
 - `styles/global.css` — design tokens as CSS custom properties (`--ink`, `--bg`, `--sand`, `--steel`, `--accent`, layout vars) and base resets. **It enforces `border-radius: 0 !important` on `*, *::before, *::after` globally** — the no-rounded-corners rule is structural, not per-component. Utility classes: `.container`, `.section`, `.section--dark`, `.section--sand`, `.mono`.
 - `assets/` — `tim-portrait.png` and `logo-schmitz.svg`. The portrait is rendered through Astro's `astro:assets` `<Image>` (`Portrait.astro`) which emits responsive WebP at build time — do **not** hand-optimize it.
+- `styles/effects.css` + `scripts/effects.js` — the **motion layer** (loaded in `BaseLayout`): scroll reveals (`.fx`/`.is-in`, auto-tagged by the script), line-draw for existing 1 px border-tops (`.fx-line`), hero parallax (`[data-parallax]`), and ScrollRail active state. Everything is additive and gated behind `html.js` (set by the script) and `prefers-reduced-motion` — with JS off or reduced motion the site renders fully static, identical to the pre-motion design. `Knoten.astro` has an `animate` prop (`'load'` = assemble on page load, used in the hero; `'scroll'` = assemble when an ancestor gets `.is-in`, used in section 04).
 
 Conventions: every component is a `.astro` file with a frontmatter `interface Props`, styles are component-scoped `<style>` blocks (use `:global()` only deliberately), shared values come from the CSS custom properties in `global.css`.
 
@@ -83,7 +84,9 @@ Full type scale and per-section specs are in `README.md`; the JSX inline styles 
 → 10 Kontakt (Mitternacht) → Footer (Mitternacht)
 ```
 
-Top-nav is **not** sticky (klassisch statisch). No parallax, no scroll reveals, no complex animations — the brand lives from ruhe.
+Top-nav is **not** sticky (klassisch statisch).
+
+**Motion policy (revised July 2026, owner decision — supersedes the older "no animations, die Marke lebt von Ruhe" rule in `README.md`/`CI Guidelines.md`):** the site has a deliberate, orchestrated motion layer — Knoten assembly, staggered scroll reveals, line-draws, hero parallax ghost, ScrollRail, CTA wipe. New effects must follow the same pattern: additive only (static page without JS and under `prefers-reduced-motion`), transform/opacity-based, in brand colors, no springy/bouncy easing beyond the existing cubic-beziers. The other brand rules (no radius, no shadows, no gradients, accent never as a fill) still apply to motion.
 
 ## Performance targets (when shipping)
 
