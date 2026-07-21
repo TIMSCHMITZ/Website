@@ -1,0 +1,277 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/nav';
+
+const questions = [
+  ['Nutzung im Alltag', ['Fast nie – liegt brach', "Ab und zu, wenn's grad passt", 'Täglich, fest eingeplant']],
+  ['Wer nutzt KI', ['Nur ich, wenn überhaupt', 'Ein paar Leute – inoffiziell', 'Das Team, mit klaren Aufgaben']],
+  ['In Abläufen verankert', ['Gar nicht', 'Einzelne Aufgaben', 'Fester Teil mehrerer Prozesse']],
+  ['Regeln & Datenschutz', ['Kein Thema bei uns', '„Passt schon“ – ungeregelt', 'Klare Regeln, was rein darf']],
+  ['Spürbare Zeitersparnis', ['Spür ich nicht', 'Manchmal', 'Mehrere Std./Woche, messbar']],
+  ['Know-how im Team', ["Keiner weiß, wie's sauber geht", 'Einzelne haben sich was beigebracht', 'Team geschult, Standards da']],
+];
+
+const results = {
+  1: {
+    name: 'Ausprobiert',
+    desc: 'Du hast KI angetestet, aber im Alltag liegt sie brach. Das ist der häufigste – und ehrlichste – Startpunkt.',
+    step: 'Einen Anwendungsfall, den du diese Woche wirklich nutzt. Nicht zehn Tools testen – einen. Nimm eine wiederkehrende Aufgabe (Angebote, Kunden-Mails, Zusammenfassungen) und mach sie 5 Tage konsequent mit KI. Reifegrad entsteht durch Wiederholung, nicht durch Auswahl.',
+  },
+  2: {
+    name: 'Gelegentlich',
+    desc: 'KI hilft dir gelegentlich, ist aber kein fester Teil deiner Abläufe – viel Potenzial liegt noch brach.',
+    step: 'Aus Zufall wird System: Leg 2–3 feste Aufgaben fest, die ab jetzt immer über KI laufen – plus eine einfache Regel, welche Daten rein dürfen und welche nicht. So wird aus „wenn\'s passt“ ein verlässlicher Ablauf.',
+  },
+  3: {
+    name: 'Produktiv',
+    desc: 'KI ist fester Bestandteil deiner Arbeit und spart messbar Zeit. Stark – jetzt geht es ums saubere Skalieren.',
+    step: 'Dokumentierte Prozesse, klare Team-Regeln, gemessene Zeitersparnis. Bring den Vorsprung ins ganze Team – ohne Schatten-KI und ohne Datenschutz-Risiko.',
+  },
+};
+
+const letters = ['A', 'B', 'C'];
+---
+
+<BaseLayout
+  title="Der KI-Selbstcheck — Schmitz Systemarchitektur"
+  description="In 5 Minuten ehrlich einordnen, wo dein Betrieb wirklich mit KI steht – und was dein nächster Schritt ist. Der KI-Reifegrad-Selbstcheck für Geschäftsführer im Mittelstand."
+>
+  <a class="skip" href="/">← Schmitz Systemarchitektur</a>
+
+  <main class="wrap">
+    <header class="hero">
+      <div class="kicker">KI im Mittelstand · Selbstcheck</div>
+      <div class="rule"></div>
+      <h1>Der KI&#8209;<span class="ac">Selbstcheck.</span></h1>
+      <p class="sub">In 5 Minuten ehrlich einordnen, wo dein Betrieb wirklich mit KI steht – und was dein
+        nächster Schritt ist. Ohne Buzzwords, ohne Tool-Wettrennen.</p>
+      <div class="badges"><span>5 Minuten</span><span>Kostenlos</span><span>6 Fragen</span></div>
+    </header>
+
+    <div class="stages">
+      <div class="stage"><div class="n">Stufe 1</div><div class="t">Ausprobiert</div><p>ChatGPT mal geöffnet – aber im Alltag nutzt du es nicht wirklich.</p></div>
+      <div class="stage"><div class="n">Stufe 2</div><div class="t">Gelegentlich</div><p>Du greifst zu, wenn's passt – aber es ist kein fester Teil deiner Abläufe.</p></div>
+      <div class="stage"><div class="n">Stufe 3</div><div class="t">Produktiv</div><p>KI ist fester Bestandteil deiner Arbeit und spart jede Woche echte Zeit.</p></div>
+    </div>
+
+    <div class="note">Die meisten denken, sie sind bei <b>Stufe 3</b> – und stecken in Wahrheit bei <b>Stufe 1</b>.
+      Das ist völlig okay. Entscheidend ist nur, dass du <b>ehrlich weißt, wo du stehst.</b></div>
+
+    <div class="seclabel">Der Selbstcheck</div>
+    <h2>Wähl pro Frage, was am ehesten stimmt</h2>
+    <p class="lead">Ganz ehrlich – niemand schaut zu. Am Ende siehst du deine Stufe und den nächsten Schritt.</p>
+
+    <div id="quiz">
+      {questions.map((q, qi) => (
+        <div class="q" data-qi={qi}>
+          <div class="qh"><span class="qnum">{String(qi + 1).padStart(2, '0')}</span><span class="qt">{q[0]}</span></div>
+          <div class="opts">
+            {q[1].map((opt, oi) => (
+              <button class="opt" type="button" data-oi={oi}>
+                <span class="ol">{letters[oi]}</span>{opt}
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="bar">
+      <div class="progress" id="progress">0 / 6 beantwortet</div>
+      <button class="btn primary" id="showBtn" disabled>Mein Ergebnis anzeigen</button>
+    </div>
+
+    <div id="result" data-results={JSON.stringify(results)}>
+      <div class="rescard">
+        <div class="rl">Dein Ergebnis</div>
+        <div class="rstage">Stufe <span id="rNum"></span> · <span id="rName"></span></div>
+        <div class="ladder" id="ladder"><span></span><span></span><span></span></div>
+        <p class="rdesc" id="rDesc"></p>
+        <div class="steplbl">Dein nächster Schritt</div>
+        <p class="step" id="rStep"></p>
+      </div>
+
+      <div class="cta">
+        <h3>Willst du wissen, wo du <span>wirklich</span> stehst?</h3>
+        <p>Der Check gibt dir die Richtung – der ehrliche Blick von außen den nächsten Schritt. Buch dir
+          einen kurzen Klarheits-Call: 15 Minuten, ich sag dir, wo dein Betrieb steht und wo du anfängst.</p>
+        <div class="ctabtns">
+          <a class="btn dark" href={contact.cal} target="_blank" rel="noopener noreferrer">Klarheits-Call buchen</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .skip {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--steel);
+    text-decoration: none;
+    padding: 24px 0 0 24px;
+  }
+  .skip:hover { color: var(--accent); }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .hero { padding: 40px 0 30px; }
+  .kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--steel);
+  }
+  .rule { height: 2px; width: 52px; background: var(--accent); margin: 16px 0 22px; }
+  h1 {
+    font-weight: 800;
+    font-size: clamp(34px, 7vw, 54px);
+    line-height: 1.03;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h1 .ac { color: var(--accent); }
+  .sub {
+    font-size: clamp(15px, 2.6vw, 18px);
+    color: #2c3a52;
+    margin: 18px 0 0;
+    max-width: 600px;
+  }
+  .badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+  .badges span {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--steel);
+    border: 1px solid rgba(90, 102, 122, 0.4);
+    padding: 6px 12px;
+  }
+
+  .stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 8px 0 36px; }
+  .stage { background: var(--sand); border: 1px solid rgba(22, 34, 58, 0.1); padding: 18px 16px; }
+  .stage .n { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+  .stage .t { font-weight: 700; font-size: 16px; margin: 6px 0 7px; }
+  .stage p { font-size: 13px; color: #3a465e; margin: 0; }
+
+  .note { background: var(--ink); color: var(--bg); padding: 20px 22px; font-size: 15px; margin-bottom: 44px; }
+  .note b { color: #e8b9a6; font-weight: 700; }
+
+  .seclabel { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel); margin-bottom: 6px; }
+  h2 { font-weight: 800; font-size: clamp(24px, 4.5vw, 32px); letter-spacing: -0.01em; margin: 0 0 6px; }
+  .lead { color: #2c3a52; margin: 0 0 26px; font-size: 15px; }
+
+  .q { border-top: 1px solid rgba(90, 102, 122, 0.28); padding: 20px 0; }
+  .qh { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+  .qnum { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+  .qt { font-weight: 700; font-size: 16px; }
+  .opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .opt {
+    text-align: left; background: var(--sand); border: 1.5px solid rgba(22, 34, 58, 0.1);
+    padding: 12px 13px; cursor: pointer; font-family: inherit; font-size: 13px; color: #3a465e;
+    line-height: 1.35; transition: border-color 0.12s, background 0.12s, transform 0.05s;
+  }
+  .opt:hover { border-color: var(--steel); }
+  .opt:active { transform: scale(0.99); }
+  .opt .ol { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--steel); margin-bottom: 5px; }
+  .opt.sel { border-color: var(--accent); background: #fff; box-shadow: inset 0 0 0 1.5px var(--accent); }
+  .opt.sel .ol { color: var(--accent); }
+
+  .bar {
+    position: sticky; bottom: 0; z-index: 2;
+    background: linear-gradient(to top, var(--bg) 62%, rgba(241, 235, 222, 0));
+    padding: 20px 0 22px; margin-top: 10px;
+  }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: inherit; font-weight: 700; font-size: 15px; border: none; padding: 15px 26px;
+    cursor: pointer; text-decoration: none; transition: opacity 0.15s, transform 0.05s;
+  }
+  .btn:active { transform: scale(0.99); }
+  .btn.primary { background: var(--accent); color: #fff; width: 100%; }
+  .btn.primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn.dark { background: var(--ink); color: var(--bg); }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+  .progress { text-align: center; font-family: var(--mono); font-size: 12px; color: var(--steel); margin-bottom: 12px; letter-spacing: 0.06em; }
+
+  #result { display: none; scroll-margin-top: 20px; }
+  #result.show { display: block; animation: fade 0.4s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { #result.show { animation: none; } }
+
+  .rescard { background: var(--ink); color: var(--bg); padding: 32px 26px; margin: 34px 0 0; }
+  .rescard .rl { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #e8b9a6; }
+  .rescard .rstage { font-weight: 800; font-size: clamp(26px, 5vw, 36px); margin: 8px 0 4px; letter-spacing: -0.01em; }
+  .rescard .rstage span { color: #e8b9a6; }
+  .rescard .rdesc { font-size: 15px; color: #d7dae2; margin: 0 0 22px; }
+  .rescard .steplbl { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: #e8b9a6; text-transform: uppercase; }
+  .rescard .step { font-size: 15px; color: #f1ede2; margin: 8px 0 0; padding-left: 16px; border-left: 3px solid var(--accent); }
+  .ladder { display: flex; gap: 6px; margin: 18px 0 4px; }
+  .ladder span { flex: 1; height: 6px; background: rgba(255, 255, 255, 0.16); }
+  .ladder span.on { background: var(--accent); }
+
+  .cta { margin: 40px 0 70px; }
+  .cta h3 { font-weight: 800; font-size: clamp(20px, 3.6vw, 26px); margin: 0 0 6px; }
+  .cta h3 span { color: var(--accent); }
+  .cta p { color: #2c3a52; font-size: 15px; margin: 0 0 18px; }
+  .ctabtns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .ctabtns .btn { flex: 1; min-width: 210px; }
+
+  @media (max-width: 560px) {
+    .stages { grid-template-columns: 1fr; }
+    .opts { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var quiz = document.getElementById('quiz');
+    var qs = quiz.querySelectorAll('.q');
+    var answers = new Array(qs.length).fill(null);
+    var showBtn = document.getElementById('showBtn');
+    var progress = document.getElementById('progress');
+    var resultEl = document.getElementById('result');
+    var RESULTS = JSON.parse(resultEl.getAttribute('data-results'));
+
+    qs.forEach(function (q, qi) {
+      var opts = q.querySelectorAll('.opt');
+      opts.forEach(function (b) {
+        b.addEventListener('click', function () {
+          answers[qi] = parseInt(b.getAttribute('data-oi'), 10);
+          opts.forEach(function (c) { c.classList.remove('sel'); });
+          b.classList.add('sel');
+          var done = answers.filter(function (a) { return a !== null; }).length;
+          progress.textContent = done + ' / ' + qs.length + ' beantwortet';
+          showBtn.disabled = done < qs.length;
+        });
+      });
+    });
+
+    showBtn.addEventListener('click', function () {
+      var c = [0, 0, 0];
+      answers.forEach(function (a) { c[a]++; });
+      var max = Math.max(c[0], c[1], c[2]);
+      var stage = c.indexOf(max) + 1; // Gleichstand: niedrigere Stufe (ehrlich bleiben)
+      var r = RESULTS[stage];
+      document.getElementById('rNum').textContent = stage;
+      document.getElementById('rName').textContent = r.name;
+      document.getElementById('rDesc').textContent = r.desc;
+      document.getElementById('rStep').textContent = r.step;
+      var rungs = document.getElementById('ladder').children;
+      for (var i = 0; i < rungs.length; i++) { rungs[i].classList.toggle('on', i < stage); }
+      resultEl.classList.add('show');
+      resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  })();
+</script>
