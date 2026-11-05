@@ -34,8 +34,10 @@ function collectLeaves(el, depth, out) {
 function setupReveals() {
   const targets = [];
 
+  // Footer bewusst ohne Reveal: Er sitzt am Seitenende im ausgesparten
+  // unteren Viewport-Rand und würde mobil nie eingeblendet (Impressum unsichtbar).
   document
-    .querySelectorAll('.section > .container, footer > .container')
+    .querySelectorAll('.section > .container')
     .forEach((container) => {
       for (const child of container.children) {
         const leaves = [];
